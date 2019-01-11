@@ -5,6 +5,9 @@ import '../ui_elements/portfolio_drawer.dart';
 
 class PortfolioPage extends StatelessWidget {
   final ScrollController _scrollController = ScrollController();
+  final String heroTag;
+
+  PortfolioPage(this.heroTag);
 
   String _paragraphBuilder(List<String> sentences) {
     String result = '';
@@ -62,8 +65,10 @@ class PortfolioPage extends StatelessWidget {
                 maxHeight: MediaQuery.of(context).size.height,
                 minHeight: 80,
                 scrollController: _scrollController,
+                coverImageUrl: 'assets/portfolio_card_image.jpg',
                 appbarTitle: 'Selena Revenge',
-                openButtonText: 'See the game'),
+                openButtonText: 'See the game',
+                heroTag: heroTag),
           ),
           SliverList(
             delegate: SliverChildListDelegate([

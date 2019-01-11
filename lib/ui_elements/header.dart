@@ -9,6 +9,7 @@ class Header extends SliverPersistentHeaderDelegate {
   final String appbarTitle;
   final String openButtonText;
   final ScrollController scrollController;
+  final String heroTag;
 
   Header(
       {@required this.minHeight,
@@ -16,7 +17,8 @@ class Header extends SliverPersistentHeaderDelegate {
       @required this.scrollController,
       this.coverImageUrl: 'assets/meteors.jpg',
       this.appbarTitle: 'My Portfolio',
-      this.openButtonText: 'See my works'});
+      this.openButtonText: 'See my works',
+      this.heroTag: ''});
 
   @override
   double get maxExtent => maxHeight;
@@ -24,52 +26,66 @@ class Header extends SliverPersistentHeaderDelegate {
   @override
   double get minExtent => minHeight;
 
+  Widget _buildCoverImage() {
+    return Hero(
+      tag: heroTag,
+      child: Image.asset(coverImageUrl, fit: BoxFit.cover),
+    );
+  }
+
+  Widget _buildHeaderTitle(double deviceWidth) {
+    return Container(
+      width: deviceWidth,
+      padding: EdgeInsets.only(left: 30, top: 10),
+      child: Text(
+        appbarTitle,
+        textAlign: TextAlign.left,
+        style: TextStyle(
+            fontSize: 24, color: Colors.white, fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+
+  Widget _buildOpenButton(double shrinkOffset, double deviceHeight) {
+    return shrinkOffset >= maxHeight - minHeight - 60
+        ? Container()
+        : Expanded(
+            child: Center(
+              child: RaisedButton(
+                color: Colors.redAccent,
+                textColor: Colors.white,
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                child: Text(
+                  openButtonText,
+                  style: TextStyle(fontSize: 24),
+                ),
+                onPressed: () => Utility.scrollTo(deviceHeight - minHeight,
+                    controller: scrollController),
+              ),
+            ),
+          );
+  }
+
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
+    double deviceWidth = MediaQuery.of(context).size.width;
+    double deviceHeight = MediaQuery.of(context).size.height;
     return Stack(
       fit: StackFit.expand,
       overflow: Overflow.clip,
       children: <Widget>[
-        Image.asset(coverImageUrl, fit: BoxFit.cover),
+        _buildCoverImage(),
         Column(
           children: <Widget>[
             SizedBox(
               height: 30,
             ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.only(left: 30, top: 10),
-              child: Text(
-                appbarTitle,
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                    fontSize: 24,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            shrinkOffset >= maxHeight - minHeight - 60
-                ? Container()
-                : Expanded(
-                    child: Center(
-                      child: RaisedButton(
-                        color: Colors.redAccent,
-                        textColor: Colors.white,
-                        elevation: 5,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                        child: Text(
-                          openButtonText,
-                          style: TextStyle(fontSize: 24),
-                        ),
-                        onPressed: () => Utility.scrollTo(
-                            MediaQuery.of(context).size.height - minHeight),
-                      ),
-                    ),
-                  )
+            _buildHeaderTitle(deviceWidth),
+            _buildOpenButton(shrinkOffset, deviceHeight),
           ],
         )
       ],

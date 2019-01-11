@@ -14,13 +14,13 @@ class MainApp extends StatelessWidget {
       switch (paths[2]) {
         case 'discord_clone':
           return CustomRoute<bool>(
-              builder: (BuildContext context) => PortfolioPage());
+              builder: (BuildContext context) => PortfolioPage('discord_clone'));
         case 'flutter_shop':
           return CustomRoute<bool>(
-              builder: (BuildContext context) => PortfolioPage());
+              builder: (BuildContext context) => PortfolioPage('flutter_shop'));
         case 'selena_revenge':
           return CustomRoute<bool>(
-              builder: (BuildContext context) => PortfolioPage());
+              builder: (BuildContext context) => PortfolioPage('selena_revenge'));
       }
     }
     return null;

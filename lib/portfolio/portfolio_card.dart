@@ -8,6 +8,56 @@ class PortfolioCard extends StatelessWidget {
 
   PortfolioCard(this._portfolioModel, this._cardIndex);
 
+  Widget _buildCardImage() {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 15),
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Hero(
+        tag: _portfolioModel.getPortfolios[_cardIndex].route,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child:
+              Image.asset(_portfolioModel.getPortfolios[_cardIndex].imageUrl),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCardTitle() {
+    return Text(
+      _portfolioModel.getPortfolios[_cardIndex].title,
+      style: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.w500,
+        color: Colors.blueGrey,
+      ),
+    );
+  }
+
+  Widget _buildCardDescription() {
+    return Text(
+      _portfolioModel.getPortfolios[_cardIndex].description,
+      style: TextStyle(
+        fontSize: 20,
+      ),
+      textAlign: TextAlign.center,
+    );
+  }
+
+  Widget _buildDetailButton(BuildContext context) {
+    return RaisedButton(
+      color: Colors.redAccent,
+      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      child: Text(
+        'Detail',
+        style: TextStyle(fontSize: 20, color: Colors.white),
+      ),
+      onPressed: () => Navigator.pushNamed(context,
+          '/portfolio/${_portfolioModel.getPortfolios[_cardIndex].route}'),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,48 +71,16 @@ class PortfolioCard extends StatelessWidget {
         color: Colors.white70,
         child: Column(
           children: <Widget>[
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 15),
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.asset(
-                    _portfolioModel.getPortfolios[_cardIndex].imageUrl),
-              ),
-            ),
-            Text(
-              _portfolioModel.getPortfolios[_cardIndex].title,
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w500,
-                color: Colors.blueGrey,
-              ),
-            ),
+            _buildCardImage(),
+            _buildCardTitle(),
             SizedBox(
               height: 10,
             ),
-            Text(
-              _portfolioModel.getPortfolios[_cardIndex].description,
-              style: TextStyle(
-                fontSize: 20,
-              ),
-              textAlign: TextAlign.center,
-            ),
+            _buildCardDescription(),
             SizedBox(
               height: 10,
             ),
-            RaisedButton(
-              color: Colors.redAccent,
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              child: Text(
-                'Detail',
-                style: TextStyle(fontSize: 20, color: Colors.white),
-              ),
-              onPressed: () => Navigator.pushNamed(context,
-                  '/portfolio/${_portfolioModel.getPortfolios[_cardIndex].route}'),
-            ),
+            _buildDetailButton(context),
             SizedBox(
               height: 10,
             ),

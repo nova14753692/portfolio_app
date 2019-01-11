@@ -5,9 +5,7 @@ import '../helper/ultility.dart';
 
 class PortfolioDrawer extends AppDrawer {
   PortfolioDrawer(ScrollController scrollController)
-      : super(scrollController: scrollController) {
-    scrollController = null;
-  }
+      : super(scrollController: scrollController);
 
   @override
   onDrawerItemTap(double offset, BuildContext context) {

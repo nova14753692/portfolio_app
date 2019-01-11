@@ -51,6 +51,9 @@ abstract class AppDrawer extends StatelessWidget {
   }
 
   Widget buildDrawer(BuildContext context) {
+    double aboutPos = _isInPortraitMode(context) ? 600 : 331.4;
+    double portfolioPos = _isInPortraitMode(context) ? 2100 : 2080;
+    double contactPos = _isInPortraitMode(context) ? 3565.7 : 3239.1;
     return Drawer(
       child: Stack(
         children: <Widget>[
@@ -68,9 +71,9 @@ abstract class AppDrawer extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              _buildDrawerItem(context, 'About', Icons.account_box, 600),
-              _buildDrawerItem(context, 'Portfolio', Icons.apps, 2100),
-              _buildDrawerItem(context, 'Contact', Icons.contact_mail, 3700),
+              _buildDrawerItem(context, 'About', Icons.account_box, aboutPos),
+              _buildDrawerItem(context, 'Portfolio', Icons.apps, portfolioPos),
+              _buildDrawerItem(context, 'Contact', Icons.contact_mail, contactPos),
               div.Divider(color: Colors.white54, width: 2),
             ],
           ),
