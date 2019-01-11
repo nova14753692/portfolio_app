@@ -24,33 +24,39 @@ class PortfolioCard extends StatelessWidget {
   }
 
   Widget _buildCardTitle() {
-    return Text(
-      _portfolioModel.getPortfolios[_cardIndex].title,
-      style: TextStyle(
-        fontSize: 24,
-        fontWeight: FontWeight.w500,
-        color: Colors.blueGrey,
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 5),
+      child: Text(
+        _portfolioModel.getPortfolios[_cardIndex].title,
+        style: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.w500,
+          color: Colors.blueGrey,
+        ),
       ),
     );
   }
 
   Widget _buildCardDescription() {
-    return Text(
-      _portfolioModel.getPortfolios[_cardIndex].description,
-      style: TextStyle(
-        fontSize: 20,
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 5),
+      child: Text(
+        _portfolioModel.getPortfolios[_cardIndex].description,
+        style: TextStyle(
+          fontSize: 20,
+        ),
+        textAlign: TextAlign.center,
       ),
-      textAlign: TextAlign.center,
     );
   }
 
   Widget _buildDetailButton(BuildContext context) {
     return RaisedButton(
-      color: Colors.redAccent,
+      color: Colors.black54,
       padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Text(
-        'Detail',
+        'See detail',
         style: TextStyle(fontSize: 20, color: Colors.white),
       ),
       onPressed: () => Navigator.pushNamed(context,
@@ -78,11 +84,11 @@ class PortfolioCard extends StatelessWidget {
             ),
             _buildCardDescription(),
             SizedBox(
-              height: 10,
+              height: 20,
             ),
             _buildDetailButton(context),
             SizedBox(
-              height: 10,
+              height: 20,
             ),
           ],
         ),

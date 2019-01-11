@@ -11,12 +11,14 @@ class Header extends SliverPersistentHeaderDelegate {
   final ScrollController scrollController;
   final String heroTag;
   final bool backButton;
+  final bool hamburger;
 
   Header(
       {@required this.minHeight,
       @required this.maxHeight,
       @required this.scrollController,
       this.backButton: false,
+      this.hamburger: false,
       this.coverImageUrl: 'assets/meteors.jpg',
       this.appbarTitle: 'My Portfolio',
       this.openButtonText: 'See my works',
@@ -43,26 +45,57 @@ class Header extends SliverPersistentHeaderDelegate {
         appbarTitle,
         textAlign: TextAlign.left,
         style: TextStyle(
-            fontSize: 24, color: Colors.white, fontWeight: FontWeight.bold),
+            fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
       ),
     );
   }
 
-  Widget _buildAppBar(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        IconButton(
-          padding: EdgeInsets.only(top: 10, left: 20),
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
-          iconSize: 36,
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        _buildHeaderTitle(),
-      ],
+  Widget _buildBackButton(BuildContext context) {
+    return IconButton(
+      padding: EdgeInsets.only(top: 10, left: 20),
+      icon: Icon(
+        Icons.arrow_back,
+        color: Colors.white,
+      ),
+      iconSize: 36,
+      onPressed: () => Navigator.of(context).pop(),
     );
+  }
+
+  Widget _buildHamburgerButton(BuildContext context) {
+    return IconButton(
+      padding: EdgeInsets.only(top: 10, left: 20),
+      icon: Icon(
+        Icons.dehaze,
+        color: Colors.white,
+      ),
+      iconSize: 36,
+      onPressed: () => Scaffold.of(context).openDrawer(),
+    );
+  }
+
+  Widget _buildAppBar(BuildContext context) {
+    if (hamburger) {
+      return Row(
+        children: <Widget>[
+          _buildHamburgerButton(context),
+          _buildHeaderTitle(),
+        ],
+      );
+    } else if (backButton) {
+      return Row(
+        children: <Widget>[
+          _buildBackButton(context),
+          _buildHeaderTitle(),
+        ],
+      );
+    } else {
+      return Row(
+        children: <Widget>[
+          _buildHeaderTitle(),
+        ],
+      );
+    }
   }
 
   Widget _buildOpenButton(double shrinkOffset, double deviceHeight) {
@@ -102,7 +135,7 @@ class Header extends SliverPersistentHeaderDelegate {
             SizedBox(
               height: 30,
             ),
-            backButton ? _buildAppBar(context) : _buildHeaderTitle(),
+            _buildAppBar(context),
             _buildOpenButton(shrinkOffset, deviceHeight),
           ],
         )

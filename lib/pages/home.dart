@@ -31,6 +31,7 @@ class Home extends StatelessWidget {
                 maxHeight: MediaQuery.of(context).size.height,
                 minHeight: 90,
                 scrollController: _scrollController,
+                hamburger: true,
                 appbarTitle: 'Vincent Tran\'s Portfolio',
                 openButtonText: 'See what\'s inside',
               ),

@@ -20,7 +20,8 @@ class PortfolioListPage extends StatelessWidget {
             delegate: Header(
                 maxHeight: MediaQuery.of(context).size.height,
                 minHeight: 80,
-                scrollController: _scrollController),
+                scrollController: _scrollController,
+                hamburger: true),
           ),
           SliverToBoxAdapter(
             child: Container(

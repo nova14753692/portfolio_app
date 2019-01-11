@@ -24,6 +24,7 @@ class ContactPage extends StatelessWidget {
                 maxHeight: MediaQuery.of(context).size.height,
                 minHeight: 90,
                 scrollController: _scrollController,
+                hamburger: true,
                 appbarTitle: 'Contact',
                 openButtonText: 'Contact Me',
               ),

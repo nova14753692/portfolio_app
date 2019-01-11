@@ -58,6 +58,11 @@ class AppDrawer extends StatelessWidget {
             children: <Widget>[
               _buildDrawerHeaderFooter(
                   context, 'assets/meteors_landscaped.jpg'),
+              _hasEnoughSpace(context)
+                  ? SizedBox(
+                      height: 70,
+                    )
+                  : Container(),
               div.Divider(color: Colors.white54, width: 2),
               _buildDrawerItem(context, 'All', Icons.list, '/'),
               _buildDrawerItem(context, 'About', Icons.account_box, '/about'),

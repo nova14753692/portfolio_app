@@ -13,6 +13,7 @@ class Experience extends StatelessWidget {
           child: Text(
             legend,
             textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 13),
           )),
     );
   }
