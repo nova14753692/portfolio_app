@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../ui_elements/header.dart';
-import '../ui_elements/portfolio_drawer.dart';
+import '../ui_elements/app_drawer.dart';
 
 class PortfolioPage extends StatelessWidget {
   final ScrollController _scrollController = ScrollController();
@@ -55,7 +55,7 @@ class PortfolioPage extends StatelessWidget {
       'pellentesque. Nam condimentum accumsan magna eget facilisis. Aliquam quis eros orci.\n\n'
     ]);
     return Scaffold(
-      drawer: PortfolioDrawer(_scrollController),
+      drawer: AppDrawer(),
       body: CustomScrollView(
         controller: _scrollController,
         slivers: <Widget>[
@@ -63,8 +63,9 @@ class PortfolioPage extends StatelessWidget {
             pinned: true,
             delegate: Header(
                 maxHeight: MediaQuery.of(context).size.height,
-                minHeight: 80,
+                minHeight: 90,
                 scrollController: _scrollController,
+                backButton: true,
                 coverImageUrl: 'assets/portfolio_card_image.jpg',
                 appbarTitle: 'Selena Revenge',
                 openButtonText: 'See the game',

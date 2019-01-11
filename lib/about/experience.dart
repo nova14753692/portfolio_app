@@ -66,18 +66,18 @@ class Experience extends StatelessWidget {
               height: 20,
             ),
             _buildLegend(context, horizontalPaddingPercent),
-            ExpProgress('C++', 50, horizontalPaddingPercent),
+            ExpProgress('C++', 60, horizontalPaddingPercent),
             ExpProgress('C#', 60, horizontalPaddingPercent, 0.1),
             ExpProgress('Java', 65, horizontalPaddingPercent, 0.2),
-            ExpProgress('Dart', 30, horizontalPaddingPercent, 0.3),
-            ExpProgress('ReactJs', 20, horizontalPaddingPercent, 0.4),
+            ExpProgress('Dart', 35, horizontalPaddingPercent, 0.3),
+            ExpProgress('ReactJs', 30, horizontalPaddingPercent, 0.4),
             ExpProgress('Blender3D', 50, horizontalPaddingPercent, 0.4, 2000),
             ExpProgress(
-                'Unity3D Engine', 80, horizontalPaddingPercent, 0.3, 2500),
+                'Unity3D Engine', 85, horizontalPaddingPercent, 0.3, 2500),
             ExpProgress(
-                'Android Native', 50, horizontalPaddingPercent, 0.4, 2500),
+                'Android Native', 45, horizontalPaddingPercent, 0.4, 2500),
             ExpProgress(
-                'Flutter Android/iOS', 60, horizontalPaddingPercent, 0.5, 2500),
+                'Flutter Android/iOS', 65, horizontalPaddingPercent, 0.5, 2500),
           ],
         ));
   }

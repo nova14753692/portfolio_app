@@ -10,11 +10,13 @@ class Header extends SliverPersistentHeaderDelegate {
   final String openButtonText;
   final ScrollController scrollController;
   final String heroTag;
+  final bool backButton;
 
   Header(
       {@required this.minHeight,
       @required this.maxHeight,
       @required this.scrollController,
+      this.backButton: false,
       this.coverImageUrl: 'assets/meteors.jpg',
       this.appbarTitle: 'My Portfolio',
       this.openButtonText: 'See my works',
@@ -33,9 +35,9 @@ class Header extends SliverPersistentHeaderDelegate {
     );
   }
 
-  Widget _buildHeaderTitle(double deviceWidth) {
+  Widget _buildHeaderTitle() {
     return Container(
-      width: deviceWidth,
+      alignment: Alignment.centerLeft,
       padding: EdgeInsets.only(left: 30, top: 10),
       child: Text(
         appbarTitle,
@@ -43,6 +45,23 @@ class Header extends SliverPersistentHeaderDelegate {
         style: TextStyle(
             fontSize: 24, color: Colors.white, fontWeight: FontWeight.bold),
       ),
+    );
+  }
+
+  Widget _buildAppBar(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        IconButton(
+          padding: EdgeInsets.only(top: 10, left: 20),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          iconSize: 36,
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        _buildHeaderTitle(),
+      ],
     );
   }
 
@@ -72,7 +91,6 @@ class Header extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    double deviceWidth = MediaQuery.of(context).size.width;
     double deviceHeight = MediaQuery.of(context).size.height;
     return Stack(
       fit: StackFit.expand,
@@ -84,7 +102,7 @@ class Header extends SliverPersistentHeaderDelegate {
             SizedBox(
               height: 30,
             ),
-            _buildHeaderTitle(deviceWidth),
+            backButton ? _buildAppBar(context) : _buildHeaderTitle(),
             _buildOpenButton(shrinkOffset, deviceHeight),
           ],
         )

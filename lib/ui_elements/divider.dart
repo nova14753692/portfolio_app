@@ -6,8 +6,7 @@ class Divider extends StatelessWidget {
 
   Divider({this.color: Colors.black, this.width: 3});
 
-  @override
-  Widget build(BuildContext context) {
+  Widget buildDivider() {
     return Container(
       margin: EdgeInsets.only(top: 20, left: 20, right: 20),
       decoration: BoxDecoration(
@@ -16,5 +15,10 @@ class Divider extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return buildDivider();
   }
 }

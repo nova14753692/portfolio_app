@@ -51,10 +51,17 @@ class _Contact extends State<Contact> {
 
   Widget _buildSubmitButton() {
     return RaisedButton(
-      padding: EdgeInsets.symmetric(horizontal: 50),
+      color: Colors.black54,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
       child: Text(
         'Submit',
-        style: TextStyle(fontSize: 20),
+        style: TextStyle(
+          fontSize: 20,
+          color: Colors.white,
+        ),
       ),
       onPressed: () {
         if (_formKey.currentState.validate()) {

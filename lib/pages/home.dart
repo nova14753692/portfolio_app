@@ -8,38 +8,32 @@ import '../about/about.dart';
 import '../portfolio/portfolio_list.dart';
 import '../ui_elements/page_title.dart';
 import '../contact/contact.dart';
-import '../ui_elements/divider.dart' as div;
-import '../ui_elements/home_drawer.dart';
+import '../ui_elements/page_divider.dart';
+import '../ui_elements/app_drawer.dart';
+import '../helper/unfocus_node.dart';
 
 class Home extends StatelessWidget {
   final AboutModel _aboutModel = AboutModel();
   final ScrollController _scrollController = ScrollController();
 
-  Widget _buildPageDivider([color = Colors.black, double width = 3]) {
-    return SliverToBoxAdapter(
-      child: div.Divider(color: color, width: width),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: HomeDrawer(_scrollController),
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-        onVerticalDragDown: (DragDownDetails detail) =>
-            FocusScope.of(context).requestFocus(FocusNode()),
-        onHorizontalDragDown: (DragDownDetails detail) =>
-            FocusScope.of(context).requestFocus(FocusNode()),
+      drawer: AppDrawer(),
+      body: UnfocusNode().unfocusNode(
+        context,
         child: CustomScrollView(
           controller: _scrollController,
           slivers: <Widget>[
             SliverPersistentHeader(
               pinned: true,
               delegate: Header(
-                  maxHeight: MediaQuery.of(context).size.height,
-                  minHeight: 80,
-                  scrollController: _scrollController),
+                maxHeight: MediaQuery.of(context).size.height,
+                minHeight: 90,
+                scrollController: _scrollController,
+                appbarTitle: 'Vincent Tran\'s Portfolio',
+                openButtonText: 'See what\'s inside',
+              ),
             ),
             SliverToBoxAdapter(
               child: PageTitle('About'),
@@ -52,7 +46,7 @@ class Home extends StatelessWidget {
               ),
               sliver: Perk(_aboutModel.getPerks),
             ),
-            _buildPageDivider(),
+            PageDivider(),
             SliverPadding(
               padding: EdgeInsets.only(top: 40),
               sliver: About(_aboutModel),
@@ -66,7 +60,7 @@ class Home extends StatelessWidget {
               ),
             ),
             PortfolioList(),
-            _buildPageDivider(),
+            PageDivider(),
             SliverToBoxAdapter(
               child: Container(
                 child: PageTitle('Contact'),
