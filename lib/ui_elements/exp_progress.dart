@@ -22,8 +22,9 @@ class AnimatedProgressBar extends AnimatedWidget {
   Widget build(BuildContext context) {
     final Animation<double> anim = listenable;
     final frameWidth = _progressBar.getWidthPerDiv(context, 18, 4, 100);
-    final List<double> divWidths = _progressBar.calculatedAllWidth(
-        context, 18, 4, _percentTween.evaluate(anim));
+    final double currentPercent = _percentTween.evaluate(anim);
+    final List<double> divWidths =
+        _progressBar.calculatedAllWidth(context, 18, 4, currentPercent);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -40,7 +41,7 @@ class AnimatedProgressBar extends AnimatedWidget {
               ),
               height: 30,
             ),
-            _progressBar.buildProgressBar(divWidths),
+            _progressBar.buildProgressBar(divWidths, currentPercent),
             _progressBar.buildProgressBarFrame(frameWidth),
           ],
         )
@@ -101,8 +102,7 @@ class _ExpProgress extends State<ExpProgress> with TickerProviderStateMixin {
         return AnimatedProgressBar(
             widget,
             Tween<double>(begin: 0, end: widget._percent),
-            ProgressBar(widget._percent, widget._horizontalPaddingPercent,
-                widget._rowPadding),
+            ProgressBar(widget._horizontalPaddingPercent, widget._rowPadding),
             anim: _anim);
       },
     );

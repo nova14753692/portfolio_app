@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 class ProgressBar {
   final double _horizontalPaddingPercent;
   final double _rowPadding;
-  final double _percent;
   final bool _hasPercentIndicator;
 
-  ProgressBar(this._percent,
+  ProgressBar(
       [this._horizontalPaddingPercent = 0,
       this._rowPadding = 0,
       this._hasPercentIndicator = true]);
@@ -116,7 +115,7 @@ class ProgressBar {
     );
   }
 
-  Widget buildProgressBar(List<double> divWidths) {
+  Widget buildProgressBar(List<double> divWidths, double currentPercent) {
     return Container(
       padding: EdgeInsets.all(_rowPadding),
       child: Row(
@@ -142,7 +141,7 @@ class ProgressBar {
             flex: 2,
             child: _hasPercentIndicator
                 ? Text(
-                    _percent.toInt().toString() + '%',
+                    currentPercent.toInt().toString() + '%',
                     textAlign: TextAlign.right,
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),

@@ -47,8 +47,7 @@ class _Experience extends State<Experience> with TickerProviderStateMixin {
   }
 
   Widget _buildLegend(BuildContext context, double horizontalPaddingPercent) {
-    ProgressBar progressBar =
-        ProgressBar(100, horizontalPaddingPercent, 2, false);
+    ProgressBar progressBar = ProgressBar(horizontalPaddingPercent, 2, false);
     double progressBarFrameWidth =
         progressBar.getWidthPerDiv(context, 18, 4, 100);
     return Column(
@@ -68,7 +67,7 @@ class _Experience extends State<Experience> with TickerProviderStateMixin {
           ],
         ),
         progressBar.buildProgressBar(
-            progressBar.calculatedAllWidth(context, 18, 4, 100)),
+            progressBar.calculatedAllWidth(context, 18, 4, 100), 0),
       ],
     );
   }
@@ -114,8 +113,7 @@ class _Experience extends State<Experience> with TickerProviderStateMixin {
 
     _animController.addListener(() {
       if (_model != null) {
-        if (_model.isAllAnimControllerCompleted())
-          _animController.forward();
+        if (_model.isAllAnimControllerCompleted()) _animController.forward();
       }
     });
   }
