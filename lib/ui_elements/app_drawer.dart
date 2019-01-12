@@ -29,6 +29,9 @@ class AppDrawer extends StatelessWidget {
 
   Widget _buildDrawerHeaderFooter(BuildContext context, String imagePath,
       {bool header: true, bool forceDisplay: false}) {
+    if (forceDisplay &&
+        MediaQuery.of(context).orientation == Orientation.landscape)
+      forceDisplay = false;
     return (_hasEnoughSpace(context) || forceDisplay)
         ? Container(
             child: ClipRRect(
