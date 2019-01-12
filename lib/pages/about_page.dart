@@ -25,6 +25,7 @@ class AboutPage extends StatelessWidget {
             delegate: Header(
               maxHeight: MediaQuery.of(context).size.height,
               minHeight: 90,
+              hamburger: true,
               scrollController: _scrollController,
               appbarTitle: 'About Me',
               openButtonText: 'Hear my story',

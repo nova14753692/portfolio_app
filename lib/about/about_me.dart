@@ -7,30 +7,33 @@ class AboutMe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Container(
-          child: Image.asset('assets/hexagon.png'),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Text(
-          'Who is this guy?',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 15),
+      child: Column(
+        children: <Widget>[
+          Container(
+            child: Image.asset('assets/hexagon.png'),
           ),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Text(
-          aboutMeText,
-          style: TextStyle(fontSize: 20),
-          textAlign: TextAlign.center,
-        )
-      ],
+          SizedBox(
+            height: 20,
+          ),
+          Text(
+            'Who is this guy?',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            aboutMeText,
+            style: TextStyle(fontSize: 20),
+            textAlign: TextAlign.center,
+          )
+        ],
+      ),
     );
   }
 }

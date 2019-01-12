@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:scoped_model/scoped_model.dart';
+
+import './scoped_model/exp_scoped_model.dart';
+
 import './pages/home.dart';
 import './helper/custom_route.dart';
 import './pages/portfolio_page.dart';
@@ -10,6 +14,8 @@ import './pages/contact_page.dart';
 void main() => runApp(MainApp());
 
 class MainApp extends StatelessWidget {
+  final ExpScopedModel _expProgressBarScopedModel = ExpScopedModel();
+
   Route<dynamic> _setupOnGenerateRoute(RouteSettings settings) {
     final List<String> paths = settings.name.split('/');
     if (paths[0].isNotEmpty) return null;
@@ -17,13 +23,15 @@ class MainApp extends StatelessWidget {
       switch (paths[2]) {
         case 'discord_clone':
           return CustomRoute<bool>(
-              builder: (BuildContext context) => PortfolioPage('discord_clone'));
+              builder: (BuildContext context) =>
+                  PortfolioPage('discord_clone'));
         case 'flutter_shop':
           return CustomRoute<bool>(
               builder: (BuildContext context) => PortfolioPage('flutter_shop'));
         case 'selena_revenge':
           return CustomRoute<bool>(
-              builder: (BuildContext context) => PortfolioPage('selena_revenge'));
+              builder: (BuildContext context) =>
+                  PortfolioPage('selena_revenge'));
       }
     }
     return null;
@@ -39,11 +47,14 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Home(),
-      routes: _setupRoutes(),
-      onGenerateRoute: (RouteSettings settings) =>
-          _setupOnGenerateRoute(settings),
+    return ScopedModel<ExpScopedModel>(
+      model: _expProgressBarScopedModel,
+      child: MaterialApp(
+        home: Home(),
+        routes: _setupRoutes(),
+        onGenerateRoute: (RouteSettings settings) =>
+            _setupOnGenerateRoute(settings),
+      ),
     );
   }
 }

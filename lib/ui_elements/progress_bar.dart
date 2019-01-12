@@ -4,9 +4,12 @@ class ProgressBar {
   final double _horizontalPaddingPercent;
   final double _rowPadding;
   final double _percent;
+  final bool _hasPercentIndicator;
 
   ProgressBar(this._percent,
-      [this._horizontalPaddingPercent = 0, this._rowPadding = 0]);
+      [this._horizontalPaddingPercent = 0,
+      this._rowPadding = 0,
+      this._hasPercentIndicator = true]);
 
   double getWidthPerDiv(BuildContext context, int totalFlex, int flexPerDiv,
       double percentPerDiv) {
@@ -137,12 +140,14 @@ class ProgressBar {
           ),
           Expanded(
             flex: 2,
-            child: Text(
-              _percent.toInt().toString() + '%',
-              textAlign: TextAlign.right,
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-            ),
+            child: _hasPercentIndicator
+                ? Text(
+                    _percent.toInt().toString() + '%',
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  )
+                : Container(),
           ),
         ],
       ),

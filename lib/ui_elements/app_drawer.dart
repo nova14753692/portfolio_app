@@ -28,8 +28,8 @@ class AppDrawer extends StatelessWidget {
   }
 
   Widget _buildDrawerHeaderFooter(BuildContext context, String imagePath,
-      {bool header: true}) {
-    return _hasEnoughSpace(context)
+      {bool header: true, bool forceDisplay: false}) {
+    return (_hasEnoughSpace(context) || forceDisplay)
         ? Container(
             child: ClipRRect(
               borderRadius: header
@@ -39,7 +39,7 @@ class AppDrawer extends StatelessWidget {
             ),
           )
         : Container(
-            height: 50,
+            height: MediaQuery.of(context).size.height * 0.02,
           );
   }
 
@@ -56,11 +56,11 @@ class AppDrawer extends StatelessWidget {
           ),
           Column(
             children: <Widget>[
-              _buildDrawerHeaderFooter(
-                  context, 'assets/meteors_landscaped.jpg'),
+              _buildDrawerHeaderFooter(context, 'assets/meteors_landscaped.jpg',
+                  forceDisplay: true),
               _hasEnoughSpace(context)
                   ? SizedBox(
-                      height: 70,
+                      height: MediaQuery.of(context).size.height * 0.03,
                     )
                   : Container(),
               div.Divider(color: Colors.white54, width: 2),

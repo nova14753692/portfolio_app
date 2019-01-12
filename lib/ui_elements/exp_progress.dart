@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
 
+import 'package:scoped_model/scoped_model.dart';
+
+import '../scoped_model/exp_scoped_model.dart';
+
 import './progress_bar.dart';
 
 class AnimatedProgressBar extends AnimatedWidget {
@@ -67,6 +71,7 @@ class ExpProgress extends StatefulWidget {
 class _ExpProgress extends State<ExpProgress> with TickerProviderStateMixin {
   AnimationController _animController;
   Animation<double> _anim;
+  ExpScopedModel _model;
 
   @override
   void initState() {
@@ -82,17 +87,24 @@ class _ExpProgress extends State<ExpProgress> with TickerProviderStateMixin {
 
   @override
   void dispose() {
+    if (_model != null) _model.removeAnimController(_animController);
     _animController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedProgressBar(
-        widget,
-        Tween<double>(begin: 0, end: widget._percent),
-        ProgressBar(widget._percent, widget._horizontalPaddingPercent,
-            widget._rowPadding),
-        anim: _anim);
+    return ScopedModelDescendant<ExpScopedModel>(
+      builder: (BuildContext context, Widget child, ExpScopedModel model) {
+        model.addAnimController(_animController);
+        _model = model;
+        return AnimatedProgressBar(
+            widget,
+            Tween<double>(begin: 0, end: widget._percent),
+            ProgressBar(widget._percent, widget._horizontalPaddingPercent,
+                widget._rowPadding),
+            anim: _anim);
+      },
+    );
   }
 }
